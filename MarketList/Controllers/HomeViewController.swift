@@ -113,7 +113,6 @@ class HomeViewController: UIViewController, UIPageViewControllerDelegate, UIPage
         guard previousIndex >= 0 && previousIndex < viewControllers.count else {
             return nil
         }
-        changeBtn(index: previousIndex)
         return viewControllers[previousIndex]
     }
     
@@ -125,9 +124,17 @@ class HomeViewController: UIViewController, UIPageViewControllerDelegate, UIPage
         guard previousIndex >= 0 && previousIndex < viewControllers.count else {
             return nil
         }
-        changeBtn(index: previousIndex)
         return viewControllers[previousIndex]
     }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        if completed {
+            if let currentVC = pageViewController.viewControllers?.first, let index = viewControllers.index(of: currentVC) {
+                changeBtn(index: index)
+            }
+        }
+    }
+
     
     func changeBtn(index: Int){
         futuresButton.setTitleColor(index == 1 ? .red : .black, for: .normal)
