@@ -49,12 +49,13 @@ class HomeViewController: UIViewController, UIPageViewControllerDelegate, UIPage
                             futuresMarkets[index].price = updatedData.price
                         }
                     }
+                    futuresMarkets = futuresMarkets.sorted { $0.symbol < $1.symbol }
                     for (index, market) in spotMarkets.enumerated() {
                         if let updatedData = futuresData.data["\(market.symbol)_1"] {
                             spotMarkets[index].price = updatedData.price
                         }
                     }
-                    
+                    spotMarkets = spotMarkets.sorted { $0.symbol < $1.symbol }
                     if let spotVC = self?.viewControllers[0] as? SpotViewController {
                         spotVC.viewModel.refresh(with: spotMarkets)
                     }

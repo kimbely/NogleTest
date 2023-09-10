@@ -25,7 +25,7 @@ class SpotViewModel {
                             spotMarkets[index].price = updatedData.price
                         }
                     }
-                    
+                    spotMarkets = spotMarkets.sorted { $0.symbol < $1.symbol }
                     return spotMarkets
                 case .failure(_):
                     return []

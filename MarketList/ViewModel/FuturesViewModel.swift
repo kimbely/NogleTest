@@ -25,7 +25,7 @@ class FuturesViewModel {
                             futuresMarkets[index].price = updatedData.price
                         }
                     }
-                    
+                    futuresMarkets = futuresMarkets.sorted { $0.symbol < $1.symbol }
                     return futuresMarkets
                 case .failure(_):
                     return []
